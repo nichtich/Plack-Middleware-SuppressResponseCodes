@@ -8,12 +8,12 @@ sub call {
     my($self, $env) = @_;
     my $res = $self->app->($env);
     $self->response_cb($res, sub {
-		if ( $res->[0] =~ /^[45]../ and
-        	 $env->{QUERY_STRING} =~ /(?:^|&)suppress_response_codes(=([^&]+))?/ 
-		     and !($1 and $2 =~ /^(0|false)$/) ) {
-			$res->[0] = 200;
-		}
-	});
+        if ( $res->[0] =~ /^[45]../ and
+             $env->{QUERY_STRING} =~ /(?:^|&)suppress_response_codes(=([^&]+))?/ 
+             and !($1 and $2 =~ /^(0|false)$/) ) {
+            $res->[0] = 200;
+        }
+    });
 }
 
 1;
@@ -23,9 +23,9 @@ sub call {
     use Plack::Builder;
 
     builder {
-	    enable 'SuppressResponseCodes'
-	    $app
-	};
+        enable 'SuppressResponseCodes'
+        $app
+    };
 
 =head1 DESCRIPTION
 
